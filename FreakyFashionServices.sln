@@ -5,7 +5,11 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreakyFashionServices.StockService", "FreakyFashionServices.StockService\FreakyFashionServices.StockService.csproj", "{4E541843-EDF2-4EC5-92C1-4B6CAD3CF663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreakyFashionServices.CatalogService", "FreakyFashionServices.CatalogService\FreakyFashionServices.CatalogService.csproj", "{9BAD52AB-935B-4DE9-B658-D5AA9754A0DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreakyFashionServices.CatalogService", "FreakyFashionServices.CatalogService\FreakyFashionServices.CatalogService.csproj", "{9BAD52AB-935B-4DE9-B658-D5AA9754A0DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreakyFashionService.OrderService", "OrderService\FreakyFashionService.OrderService.csproj", "{F6BB9F53-3B40-4AD1-AE70-6A710AE811D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreakyFashionServices.BasketService", "FreakyFashionServices.BasketService\FreakyFashionServices.BasketService.csproj", "{48157980-54F9-4A23-8F88-6B5FF2279047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{9BAD52AB-935B-4DE9-B658-D5AA9754A0DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BAD52AB-935B-4DE9-B658-D5AA9754A0DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BAD52AB-935B-4DE9-B658-D5AA9754A0DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6BB9F53-3B40-4AD1-AE70-6A710AE811D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BB9F53-3B40-4AD1-AE70-6A710AE811D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BB9F53-3B40-4AD1-AE70-6A710AE811D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BB9F53-3B40-4AD1-AE70-6A710AE811D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48157980-54F9-4A23-8F88-6B5FF2279047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48157980-54F9-4A23-8F88-6B5FF2279047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48157980-54F9-4A23-8F88-6B5FF2279047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48157980-54F9-4A23-8F88-6B5FF2279047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
