@@ -2,6 +2,7 @@
 using FreakyFashionServices.CatalogService.Models.DTO;
 using FreakyFashionServices.CatalogService.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreakyFashionServices.CatalogService.Controllers
 {
@@ -17,6 +18,7 @@ namespace FreakyFashionServices.CatalogService.Controllers
         }
 
         // POST api/products
+        // Post a new product and save it to the DB. 
         [HttpPost]
         public IActionResult RegisterProduct(ProductDto productDto)
         {
@@ -40,6 +42,14 @@ namespace FreakyFashionServices.CatalogService.Controllers
             Context.SaveChanges(); 
 
             return Created("", productDto); // 201 Created
+        }
+        // GET api/products
+        // Fetch all products and list them. 
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> Get()
+        {
+            var products = Context.Product.ToList();
+            return products;
         }
     }
 }
