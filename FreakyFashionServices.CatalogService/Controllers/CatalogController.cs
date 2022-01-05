@@ -41,7 +41,14 @@ namespace FreakyFashionServices.CatalogService.Controllers
             Context.Product.Add(product);
             Context.SaveChanges(); 
 
-            return Created("", productDto); // 201 Created
+            if (product == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Created("", productDto); // 201 Created
+            }
         }
         // GET api/products
         // Fetch all products and list them. 
