@@ -1,9 +1,7 @@
-﻿using FreakyFashionServices.BasketService.Data;
-using FreakyFashionServices.BasketService.Models.Domain;
-using FreakyFashionServices.BasketService.Models.DTO;
+﻿using FreakyFashionServices.BasketService.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,68 +11,35 @@ namespace FreakyFashionServices.BasketService.Controllers
     [ApiController]
     public class BasketController : ControllerBase
     {
-        private ApplicationContext Context { get; set; }
-        public BasketController(ApplicationContext context)
+        public BasketController(IDistributedCache cache)
         {
-            Context = context;
+            Cache = cache;
         }
 
-        [HttpGet("{Id}")]
-        public ActionResult<UpdateBasketDto> GetBasket(int Id)
-        {
-            var basket = Context.Basket
-                .Include(x => x.Items)
-                .FirstOrDefault(x => x.Id == Id);
-
-            if (basket == null)
-                return NotFound();
-
-            var basketDto = new UpdateBasketDto
-            {
-                Id = basket.Id,
-                /*Items = basket.Items.Select(x => new UpdateBasketDto
-                {
-                    Id = x.Id,
-                    Items = x.Items
-                })*/
-
-            };
-            return Ok(basketDto);
-        }
-
-        // PUT api/<BasketController>/5
-        [HttpPut]
-        public IActionResult PutBasket(UpdateBasketDto basketDto)
-        {
-            var basket = new Basket(
-                id: basketDto.Id,
-                items: basketDto.Items
-                );
-
-            Context.Basket.Add(basket);
-            Context.SaveChanges();
-            return Created("", basketDto); // 201 Created
-
-        }
+        public IDistributedCache Cache { get; }
 
         [HttpPost]
-        public IActionResult PostBasket(UpdateBasketDto basketDto)
+        public IActionResult RegisterBasket(BasketDto basketDto)
         {
-            var basket = new Basket(
-                id: basketDto.Id,
-                items: basketDto.Items
-                );
+            var serializedBasket = JsonSerializer.Serialize(basketDto);
 
-            Context.Basket.Add(basket);
-            Context.SaveChanges();
-            return Created("", basketDto); // 201 Created
+            Cache.SetString(basketDto.Id, serializedBasket);
 
+            return Created("", null); // 201 created
         }
-        public class BasketDto
+
+        [HttpGet("{id}")]
+        public ActionResult<BasketDto> GetBasket(string id)
         {
-            public int Id { get; set; }
-            public int Items { get; set; }
+            var serializedRegistation = Cache.GetString(id);
+
+            if (serializedRegistation == null)
+                return NotFound(); // 404 Not Found
+
+            var basketDto = JsonSerializer.Deserialize<BasketDto>(serializedRegistation);
+
+            return Ok(basketDto);
         }
+        
     }
-    
 }
