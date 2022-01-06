@@ -19,7 +19,7 @@ namespace FreakyFashionServices.BasketService.Controllers
         public IDistributedCache Cache { get; }
 
         [HttpPost]
-        public IActionResult RegisterBasket(BasketDto basketDto)
+        public IActionResult RegisterBasket(Models.DTO.UpdateItemsDto basketDto)
         {
             var serializedBasket = JsonSerializer.Serialize(basketDto);
 
@@ -29,7 +29,7 @@ namespace FreakyFashionServices.BasketService.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<BasketDto> GetBasket(string id)
+        public ActionResult<Models.DTO.UpdateItemsDto> GetBasket(string id)
         {
             var serializedRegistation = Cache.GetString(id);
 
@@ -40,6 +40,21 @@ namespace FreakyFashionServices.BasketService.Controllers
 
             return Ok(basketDto);
         }
-        
+
+        [HttpPut]
+        public IActionResult UpdateItems(BasketDto basketDto)
+        {
+            var updateItemRegistration = JsonSerializer.Serialize(basketDto);
+
+            Cache.SetString(basketDto.Id, updateItemRegistration);
+
+            return Ok(updateItemRegistration);
+        }
+        public class BasketDto
+        {
+            public ICollection<Models.DTO.UpdateItemsDto> Items { get; set; }
+            public string Id { get; set; }
+        }
+
     }
 }
