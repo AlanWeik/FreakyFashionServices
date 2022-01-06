@@ -2,7 +2,9 @@
 {
     public class Order
     {
-        public string Identifier { get; protected set; }
-        public string Customer { get; protected set; }   
+        public int Id { get; set; }
+        public string Identifier { get; set; }
+        public string Customer { get; set; }
+        public ICollection<OrderLine> OrderLines { get; set; }
     }
 }

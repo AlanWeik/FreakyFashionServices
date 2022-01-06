@@ -10,7 +10,8 @@ namespace FreakyFashionService.OrderService.Data
         {
 
         }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderLine> Orderlines { get; set; }
     }
 }
 
